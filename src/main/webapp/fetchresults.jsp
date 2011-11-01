@@ -63,8 +63,7 @@
             
             String constructedFeedURL = fetchFeed.getFeedSource() +
                     "?limit=" + URLEncoder.encode(String.valueOf(fetchFeed.getSliderValue()),"UTF-8") +
-                    "&search=" + URLEncoder.encode(search.toString(),"UTF-8") +
-                    "&direction=" + URLEncoder.encode(fetchFeed.getFeedDirection(),"UTF-8");
+                    "&search=" + URLEncoder.encode(search.toString(),"UTF-8");
 %>
             <p>Fetching URL:&nbsp;<%= constructedFeedURL %></p>
 <%   

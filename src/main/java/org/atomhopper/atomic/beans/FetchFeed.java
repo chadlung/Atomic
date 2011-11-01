@@ -5,7 +5,6 @@ public class FetchFeed {
     
     private int sliderValue = 25;
     private String categorySearch;
-    private String feedDirection = "backward";
     private String feedSource;
 
     public String getCategorySearch() {
@@ -14,14 +13,6 @@ public class FetchFeed {
 
     public void setCategorySearch(String categorySearch) {
         this.categorySearch = categorySearch;
-    }
-
-    public String getFeedDirection() {
-        return feedDirection;
-    }
-
-    public void setFeedDirection(String feedDirection) {
-        this.feedDirection = feedDirection;
     }
 
     public int getSliderValue() {

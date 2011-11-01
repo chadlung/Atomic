@@ -111,14 +111,6 @@
                     </div>
 
                     <div data-role="fieldcontain">
-                        <label for="feedDirection" class="select">Feed Direction:</label>
-                        <select name="feedDirection" id="feedDirection" data-native-menu="false">
-                            <option value="backward">Backward</option>
-                            <option value="forward">Forward</option>
-                        </select>
-                    </div>
-
-                    <div data-role="fieldcontain">
                         <label for="sliderValue">Limit:</label>
                         <input type="range" name="sliderValue" id="sliderValue" value="25" min="1" max="100"  />
                     </div>
