@@ -38,11 +38,12 @@
             function onSuccess(data, status)
             {
                 // Notify the user the new ATOM entry was saved
+                $("#notification").removeClass();                 
                 $("#notification").fadeIn(2000);
                 data = $.trim(data);
                 if(data == "SUCCESS")
                 {
-                    resetTextFields();
+                    resetTextFields();                    
                     $("#notification").addClass("success");
                     $("#notification").text("The ATOM entry was saved");
                 }
@@ -51,8 +52,7 @@
                     $("#notification").addClass("error");
                     $("#notification").text(data);
                 }
-                $("#notification").fadeOut(5000);
-                $("#notification").removeClass();                
+                $("#notification").fadeOut(5000);               
             }
 
             function onError(data, status)
