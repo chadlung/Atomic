@@ -22,6 +22,7 @@
                 $("#atomSummary").val("");
                 $("#atomContent").val("");
                 $("#atomLink").val("");
+                $("#atomCategories").val("");
                 $("#atomAuthorName").val("");
                 $("#atomAuthorEmail").val("");
                 $("#atomAuthorUrl").val("");
@@ -36,12 +37,12 @@
 
             function onSuccess(data, status)
             {
-                resetTextFields();
                 // Notify the user the new ATOM entry was saved
                 $("#notification").fadeIn(2000);
                 data = $.trim(data);
                 if(data == "SUCCESS")
                 {
+                    resetTextFields();
                     $("#notification").addClass("success");
                     $("#notification").text("The ATOM entry was saved");
                 }
@@ -51,6 +52,7 @@
                     $("#notification").text(data);
                 }
                 $("#notification").fadeOut(5000);
+                $("#notification").removeClass();                
             }
 
             function onError(data, status)
@@ -180,13 +182,13 @@
                         <label for="atomContent">Content:</label>
                         <textarea name="atomContent" id="atomContent"></textarea>
                     </div>
-                    <div data-role="fieldontain">
+                    <div data-role="fieldcontain">
                         <label for="atomLink">Link:</label>
-                        <input type="text" name="atomLink" id="atomLink" value=""  />
+                        <input type="url" name="atomLink" id="atomLink" value=""  />
                     </div>
                     <div data-role="fieldcontain">
                         <label for="atomCategories">Categories:</label>
-                        <input type="search" name="atomCategories" id="atomCategories" value="" />
+                        <input type="text" name="atomCategories" id="atomCategories" value="" />
                     </div>
                         
                     <span><span style="text-decoration: underline;">Note:</span> Categories can be split with the pipe | character.  For multiple categories try this: MyCat1 | MyCat2</span>

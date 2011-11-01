@@ -35,18 +35,7 @@
     <link rel="stylesheet" href="css/atomic.css" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js"></script>
-	<script type="text/javascript" src="scripts/jquery.jfeed.js"></script>
-	
-	<script type="text/javascript">
-
-		$(document).ready(function(){
-
-			$("#fetchfeed").click(function(){
-
-			});
-
-		});           
-	</script>	
+	<script type="text/javascript" src="scripts/jquery.jfeed.js"></script>	
 </head> 
 <body>
     <!-- Fetch Page -->
@@ -65,7 +54,7 @@
 
         try {
             StringBuilder search = new StringBuilder();
-            if(fetchFeed.getFeedSource().trim().length() > 0) {
+            if(fetchFeed.getCategorySearch() != null) {
                 StringTokenizer tokenizer = new StringTokenizer(fetchFeed.getCategorySearch(), "|");
                 while (tokenizer.hasMoreTokens()) {
                      search.append("+" + tokenizer.nextToken().trim());
@@ -75,19 +64,19 @@
             String constructedFeedURL = fetchFeed.getFeedSource() +
                     "?limit=" + URLEncoder.encode(String.valueOf(fetchFeed.getSliderValue()),"UTF-8") +
                     "&search=" + URLEncoder.encode(search.toString(),"UTF-8") +
-                    "&direction=" + URLEncoder.encode(fetchFeed.getFeedDirection(),"UTF-8");            
+                    "&direction=" + URLEncoder.encode(fetchFeed.getFeedDirection(),"UTF-8");
 %>
-            <p>Incoming URL:&nbsp;<%= constructedFeedURL %></p>
+            <p>Fetching URL:&nbsp;<%= constructedFeedURL %></p>
 <%   
             URL url = new URL(constructedFeedURL);
             doc = parser.parse(url.openStream(), url.toString());
             feed = doc.getRoot();
+            
+            if (feed.getEntries().isEmpty())
+                out.print("<p>No Results</p>");            
 %>
             <ul data-role="listview" data-theme="a">
-<%
-            if (feed.getEntries().isEmpty())
-                out.print("<p>No Results</p>");
-            
+<%            
             for (Entry entry : feed.getEntries()) {
 %>
                 <li data-role="list-divider">
@@ -117,7 +106,7 @@
             </ul>
 <%
             } catch (Exception ex) {
-                out.print("<p>Error: " + ex.getMessage() + "</p>");
+                out.print("<p>Error: " + ex.getStackTrace().toString() + "</p>");
             } 
 %>
         </div><!-- /content -->

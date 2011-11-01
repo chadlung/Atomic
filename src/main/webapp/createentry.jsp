@@ -70,6 +70,6 @@
     if (resp.getStatus() == 201) {
         out.print("SUCCESS");
     } else {
-      out.print("ERROR");
+      out.print(resp.getStatusText());
     }
 %>
