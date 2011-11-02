@@ -10,7 +10,7 @@
 <%@page import="org.apache.abdera.protocol.client.AbderaClient"%>
 <%@page import="org.apache.abdera.protocol.client.RequestOptions"%>
 <%@page import="org.apache.abdera.protocol.client.ClientResponse"%>
-<jsp:useBean id="createEntry" class="org.atomhopper.atomic.beans.CreateEntry" scope="session"/>
+<jsp:useBean id="createEntry" class="org.atomhopper.atomic.beans.CreateEntry" scope="request"/>
 <jsp:setProperty name="createEntry" property="*"/>
 
 <%

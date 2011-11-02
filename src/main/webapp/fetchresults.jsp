@@ -10,7 +10,7 @@
 <%@page import="org.apache.abdera.model.Category"%>
 <%@page import="org.apache.abdera.model.Link"%>
 <%@page import="org.apache.abdera.parser.Parser"%>
-<jsp:useBean id="fetchFeed" class="org.atomhopper.atomic.beans.FetchFeed" scope="session"/>
+<jsp:useBean id="fetchFeed" class="org.atomhopper.atomic.beans.FetchFeed" scope="request"/>
 <jsp:setProperty name="fetchFeed" property="*"/> 
 
 <%!

@@ -12,6 +12,6 @@
     <context-param>  
         <param-name>feeds</param-name>
         <!-- Feeds are pipe | delimited -->
-        <param-value>http://localhost:8080/ah-war-0.9.3-SNAPSHOT/namespace/feed/|http://localhost:8080/ah-war-0.9.3-SNAPSHOT/namespace2/feed2/|http://localhost:8080/ah-war-0.9.3-SNAPSHOT/namespace3/feed3/</param-value>  
+        <param-value>http://localhost:8080/ah-war-0.9.3-SNAPSHOT/namespace/feed/|http://localhost:8080/ah-war-0.9.3-SNAPSHOT/namespace2/feed2/|http://localhost:8080/ah-war-0.9.3-SNAPSHOT/namespace3/feed3/</param-value>
     </context-param>     
 </web-app>
