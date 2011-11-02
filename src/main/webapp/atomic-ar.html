@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>-((Atomic-AR))-</title>
+        <meta name="description" content="Atomic-AR An almost realtime ATOM reader for AtomHopper.org">
+        <meta name="author" content="Chad Lung">
+        <link rel="stylesheet" href="blueprint/screen.css" type="text/css" media="screen, projection">
+        <link rel="stylesheet" href="blueprint/print.css" type="text/css" media="print">
+        <!--[if lt IE 8]><link rel="stylesheet" href="blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script type="text/javascript" src="scripts/jquery.jfeed.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#arLogo').hide();
+                $('#arLogo').delay(4000).slideDown(2000);
+
+                window.setInterval(getATOMFeed, 1500);
+            });
+            
+            function getATOMFeed() {
+                $('#scrollDiv').scrollTop(0);
+                
+                jQuery.getFeed({
+                    url: 'http://localhost:8080/ah-war-0.9.3-SNAPSHOT/namespace/feed/',
+                    success: function(feed) {
+                        var html = '';
+
+                        for(var i = 0; i < feed.items.length && i < 10; i++) {
+
+                            var item = feed.items[i];
+
+                            html += "<div class='atomEntryBox' id='" + item.id + "' name='" + item.id + "'>"
+                                + "<p>" + item.updated + "</p>"
+                                + "<p>" + item.title + "</p>"
+                                + "</div>";
+                        }
+
+                        $('#scrollDiv').html(html);
+                    }
+                }); 
+            }
+        </script>
+        <style type="text/css">
+            a:link {
+                text-decoration: none;
+                color: #007700;
+            }
+            a:visited {
+                text-decoration: none;
+                color: #007700;
+            }
+            a:hover, a:active {
+                text-decoration: underline;
+                color: #00BB00;
+            }
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 12pt;
+                background-color: #222222;
+            }
+            .box {
+                text-align: center;
+                font-weight: bold;
+                padding: 0px 10px 0px 10px;
+                background-color: #222222;
+                height: 500px;
+                text-align: left;
+                overflow: hidden;
+            }
+            .atomEntryBox {
+                border: 1px solid;
+                margin: 10px 0px;
+                padding:10px 10px 10px 10px;
+                background-repeat: no-repeat;
+                background-position: 10px center;
+                color: #4F8A10;
+                background-color: #DFF2BF;               
+                text-align: left;
+                font-weight: bold;
+            }
+            .atomicARLogo {
+                text-align: center;
+                color: #4F8A10;
+                font-weight: bold;
+                font-size: 20pt;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="span-6 prepend-top">
+                &nbsp;
+            </div>
+            <div class="span-12 prepend-top">
+                <div class="atomicARLogo" id="arLogo" name="arLogo">
+                    -((Atomic-AR))-
+                </div>
+            </div>
+            <div class="span-6 prepend-top last">
+                &nbsp;
+            </div>            
+
+            <div class="span-6 prepend-top">
+                &nbsp;
+            </div>
+            <div class="span-12 prepend-top">
+                <div class="box" id="scrollDiv" name="scrollDiv">
+                </div>
+            </div>
+            <div class="span-6 prepend-top last">
+                &nbsp;
+            </div>
+        </div>
+    </body>
+</html>
