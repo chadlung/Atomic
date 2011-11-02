@@ -12,12 +12,34 @@
         <script type="text/javascript" src="scripts/jquery.jfeed.js"></script>
 
         <script type="text/javascript">
+            
+            var currentItemIds = new Array();
+            var collectorItemIds = new Array();
+            
             $(document).ready(function() {
                 $('#arLogo').hide();
                 $('#arLogo').delay(4000).slideDown(2000);
 
                 window.setInterval(getATOMFeed, 1500);
             });
+            
+            Array.prototype.hasObject = (
+              !Array.indexOf ? function (o)
+              {
+                var l = this.length + 1;
+                while (l -= 1)
+                {
+                    if (this[l - 1] === o)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+              } : function (o)
+              {
+                return (this.indexOf(o) !== -1);
+              }
+            );            
             
             function getATOMFeed() {
                 $('#scrollDiv').scrollTop(0);
@@ -29,15 +51,26 @@
 
                         for(var i = 0; i < feed.items.length && i < 10; i++) {
 
+                            var useClass = 'atomEntryBox';
                             var item = feed.items[i];
+                            
+                            collectorItemIds.push(item.id);
+                            
+                            if((currentItemIds.length == 0) || (!(currentItemIds.hasObject(item.id)))) {
+                                useClass = 'atomEntryBoxHighlight';
+                            }
 
-                            html += "<div class='atomEntryBox' id='" + item.id + "' name='" + item.id + "'>"
+                            html += "<div class='" + useClass + "' id='" + item.id + "' name='" + item.id + "'>"
                                 + "<p>" + item.updated + "</p>"
                                 + "<p>" + item.title + "</p>"
                                 + "</div>";
+                            $('#scrollDiv').html(html);
                         }
 
-                        $('#scrollDiv').html(html);
+                        
+                        currentItemIds = [];
+                        currentItemIds = collectorItemIds.slice();
+                        collectorItemIds = [];
                     }
                 }); 
             }
@@ -70,7 +103,7 @@
                 overflow: hidden;
             }
             .atomEntryBox {
-                border: 1px solid;
+                border: 2px solid;
                 margin: 10px 0px;
                 padding:10px 10px 10px 10px;
                 background-repeat: no-repeat;
@@ -80,6 +113,17 @@
                 text-align: left;
                 font-weight: bold;
             }
+            .atomEntryBoxHighlight {
+                border: 2px solid;
+                margin: 10px 0px;
+                padding:10px 10px 10px 10px;
+                background-repeat: no-repeat;
+                background-position: 10px center;
+                color: #000000;
+                background-color: #CCFFCC;               
+                text-align: left;
+                font-weight: bold;
+            }            
             .atomicARLogo {
                 text-align: center;
                 color: #4F8A10;
